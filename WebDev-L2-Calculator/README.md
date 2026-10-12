@@ -126,4 +126,4 @@ Captured automatically from the running application.
 
 ## Author
 Georvelain Dieuveil MIBANTESSA — Web Development and Designing intern, AICTE Oasis Infobyte.
-GitHub: [Georvain1972](https://github.com/Georvain1972)
+GitHub: [georvelaindev](https://github.com/georvelaindev)

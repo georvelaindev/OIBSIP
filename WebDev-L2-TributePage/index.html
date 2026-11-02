@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hommage à Nelson Mandela (1918-2013) : biographie, chronologie et citation.">
+  <title>Nelson Mandela — Hommage</title>
+  <meta name="theme-color" content="#ecebe6">
+  <script>
+    // Active les améliorations progressives uniquement lorsque JavaScript est disponible.
+    (function () {
+      var root = document.documentElement;
+      root.classList.add("has-js");
+
+      if (
+        "IntersectionObserver" in window
+        && !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
+        root.classList.add("js");
+      }
+
+      window.setTimeout(function () {
+        if (!root.classList.contains("js-ready")) {
+          root.classList.remove("js");
+          root.classList.remove("has-js");
+        }
+      }, 2500);
+    })();
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#biographie">Aller au contenu</a>
+
+  <!-- Bandeau supérieur : accès rapide aux sources et aux crédits. -->
+  <div class="topbar">
+    <p>Hommage à Nelson Mandela · 1918&nbsp;–&nbsp;2013</p>
+    <p class="topbar-links">
+      <a href="#sources">Sources</a>
+      <span aria-hidden="true">·</span>
+      <a href="#credits">Crédits</a>
+    </p>
+  </div>
+
+  <!-- Navigation fixe avec indicateur de progression. -->
+  <nav class="site-nav" aria-label="Sections de la page">
+    <ul class="nav-links nav-left">
+      <li>
+        <a href="#biographie" data-nav="biographie">Biographie</a>
+      </li>
+      <li>
+        <a href="#chronologie" data-nav="chronologie">Chronologie</a>
+      </li>
+    </ul>
+    <a class="nav-brand" href="#top">
+      <span class="brand-name">Madiba</span>
+      <span class="brand-sub">Hommage</span>
+    </a>
+    <ul class="nav-links nav-right">
+      <li>
+        <a class="nav-pill" href="#citation" data-nav="citation">Citation</a>
+      </li>
+    </ul>
+    <div class="progress" aria-hidden="true">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+  </nav>
+
+  <!-- Présentation principale et portrait de Nelson Mandela. -->
+  <header class="hero" id="top">
+    <p class="tagline">Madiba : une vie de combat pour la liberté, l'égalité et la réconciliation</p>
+
+    <div class="hero-stage">
+      <h1>
+        <span class="h1-first">Nelson</span>
+        <span class="h1-last">Mandela</span>
+      </h1>
+      <figure class="portrait">
+        <img
+          src="images/mandela.jpg"
+          width="189"
+          height="244"
+          alt="Portrait souriant de Nelson Mandela, en chemise dorée à motifs bleus"
+        >
+        <figcaption>
+          Nelson Mandela à Johannesburg, 13 mai 2008. Photo : South Africa The Good News
+          (sagoodnews.co.za),
+          <a
+            href="https://creativecommons.org/licenses/by/2.0/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >CC BY 2.0</a>,
+          via Wikimedia Commons.
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="hero-bottom">
+      <div class="hero-actions">
+        <a class="btn btn-solid" href="#biographie">Lire la biographie</a>
+        <a class="btn-link" href="#chronologie">
+          Voir la chronologie
+          <span aria-hidden="true">&#9656;</span>
+        </a>
+      </div>
+      <dl class="dates">
+        <div>
+          <dt>Naissance</dt>
+          <dd><time datetime="1918-07-18">18 juillet 1918</time></dd>
+        </div>
+        <div>
+          <dt>Décès</dt>
+          <dd><time datetime="2013-12-05">5 décembre 2013</time></dd>
+        </div>
+      </dl>
+    </div>
+  </header>
+
+  <main>
+    <!-- Quelques chiffres clés avant le récit biographique. -->
+    <section class="facts" aria-label="Repères">
+      <ul class="facts-list" data-reveal>
+        <li class="fact">
+          <p class="fact-figure">27 ans</p>
+          <p class="fact-label">de détention</p>
+          <p class="fact-text">Dont dix-huit à Robben Island, puis à Pollsmoor et à Victor Verster.</p>
+          <a class="fact-link" href="#biographie">
+            Lire la biographie
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </li>
+        <li class="fact">
+          <p class="fact-figure">1990</p>
+          <p class="fact-label">la libération</p>
+          <p class="fact-text">Le 11 février, il sort de la prison Victor Verster.</p>
+          <a class="fact-link" href="#chronologie">
+            Voir la chronologie
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </li>
+        <li class="fact">
+          <p class="fact-figure">1993</p>
+          <p class="fact-label">prix Nobel de la paix</p>
+          <p class="fact-text">Reçu conjointement avec F. W. de Klerk.</p>
+          <a class="fact-link" href="#chronologie">
+            Voir la chronologie
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </li>
+        <li class="fact">
+          <p class="fact-figure">1994</p>
+          <p class="fact-label">président</p>
+          <p class="fact-text">Investi après les premières élections démocratiques du pays.</p>
+          <a class="fact-link" href="#chronologie">
+            Voir la chronologie
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Biographie : sans JavaScript, tous les paragraphes restent visibles. -->
+    <section id="biographie" class="section section-bio" aria-labelledby="biographie-titre">
+      <div class="bio-grid">
+        <div class="bio-intro">
+          <p class="label">La biographie</p>
+          <h2 id="biographie-titre">Liberté. Égalité. Réconciliation.</h2>
+        </div>
+        <div class="bio-main">
+          <div class="bio-text" data-reveal>
+            <p id="bio-1" data-label="Origines">
+              Rolihlahla Mandela naît le 18 juillet 1918 à Mvezo, un village du Transkei, au sein du clan Madiba,
+              un nom par lequel on le désigne encore souvent. Le prénom « Nelson » lui est donné le premier jour d'école
+              par son institutrice. À douze ans, il perd son père et grandit auprès du régent du peuple thembu, à Mqhekezweni,
+              avant de rejoindre Johannesburg.
+            </p>
+            <p id="bio-2" data-label="Engagement">
+              Devenu avocat, il s'engage tôt contre le racisme institutionnalisé. En 1944, il participe à la création de la
+              Ligue de jeunesse du Congrès national africain (ANC), quatre ans avant que l'apartheid ne devienne la politique
+              officielle du pays. En 1952, il dirige les volontaires de la Campagne de défiance et ouvre, avec son ami
+              Oliver Tambo, le premier cabinet d'avocats noir d'Afrique du Sud.
+            </p>
+            <p id="bio-3" data-label="Prison">
+              Arrêté en 1962, il est condamné à cinq ans de prison pour être sorti illégalement du pays et avoir encouragé
+              une grève. Il est encore détenu lorsque la police fait une descente, en juillet 1963, dans une cachette secrète
+              qu'il avait utilisée, à Rivonia. En octobre 1963, il est jugé avec dix autres accusés pour sabotage. En avril
+              1964, il déclare devant la cour être prêt à mourir pour l'idéal d'une société libre et démocratique. Le 12 juin
+              1964, il est condamné à la prison à vie. Il passera vingt-sept ans en détention, dont dix-huit à Robben Island,
+              puis à Pollsmoor et à Victor Verster. Il refuse plusieurs offres de libération assorties de conditions, et son
+              nom devient le symbole mondial de la lutte contre l'apartheid.
+            </p>
+            <p id="bio-4" data-label="Présidence">
+              Libéré le 11 février 1990, neuf jours après la levée de l'interdiction de l'ANC, il négocie avec le président
+              Frederik de Klerk la fin de l'apartheid et une transition pacifique vers la démocratie, ce qui leur vaut le prix
+              Nobel de la paix en 1993. Le 27 avril 1994, l'Afrique du Sud tient ses premières élections démocratiques ;
+              Mandela est investi président le 10 mai, puis quitte ses fonctions en 1999 après un seul mandat. Il s'éteint à
+              Johannesburg le 5 décembre 2013. Depuis 2010, les Nations unies célèbrent chaque 18 juillet la Journée
+              internationale Nelson Mandela.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chronologie interactive : les détails sont aussi présents dans le HTML. -->
+    <section id="chronologie" class="section section-timeline" aria-labelledby="chronologie-titre">
+      <div class="timeline-wrap">
+        <div class="section-head">
+          <h2 id="chronologie-titre">Chronologie</h2>
+          <p class="section-note">9 dates clés</p>
+        </div>
+        <div class="timeline-viewport" data-reveal>
+          <ol class="timeline">
+            <li class="timeline-item">
+              <h3 class="timeline-heading">
+                <button type="button" class="timeline-toggle" tabindex="-1">
+                  <time datetime="1918-07-18">1918</time>
+                  <span class="timeline-title">Naissance à Mvezo</span>
+                </button>
+              </h3>
+              <p class="timeline-detail" id="step-1">
+                Rolihlahla Mandela naît dans le Transkei, au sein du clan Madiba.
+              </p>
+            </li>
+            <li class="timeline-item">
+              <h3 class="timeline-heading">
+                <button type="button" class="timeline-toggle" tabindex="-1">
+                  <time datetime="1944">1944</time>
+                  <span class="timeline-title">La Ligue de jeunesse de l'ANC</span>
+                </button>
+              </h3>
+              <p class="timeline-detail" id="step-2">
+                Il compte parmi les fondateurs de la Ligue de jeunesse du Congrès national africain.
+              </p>
+            </li>
+            <li class="timeline-item">
+              <h3 class="timeline-heading">
+                <button type="button" class="timeline-toggle" tabindex="-1">
+                  <time datetime="1952">1952</time>
+                  <span class="timeline-title">Campagne de défiance et premier cabinet noir</span>
+                </button>
+              </h3>
+              <p class="timeline-detail" id="step-3">
+                Il dirige les volontaires de la Campagne de défiance et ouvre, avec Oliver Tambo, le premier cabinet
+                d'avocats noir du pays.
+              </p>
+            </li>
+            <li class="timeline-item">
+              <h3 class="timeline-heading">
+                <button type="button" class="timeline-toggle" tabindex="-1">
+                  <time datetime="1964-06-12">1964</time>
+                  <span class="timeline-title">Condamné à la prison à vie</span>
+                </button>
+              </h3>
+              <p class="timeline-detail" id="step-4">
+                À l'issue du procès de Rivonia, il est condamné le 12 juin. Il passera vingt-sept ans en détention.
+              </p>
+            </li>
+            <li class="timeline-item">
+              <h3 class="timeline-heading">
+                <button type="button" class="timeline-toggle" tabindex="-1">
+                  <time datetime="1990-02-11">1990</time>
+                  <span class="timeline-title">La libération</span>
+                </button>
+              </h3>
+              <p class="timeline-detail" id="step-5">
+                Le 11 février, il sort de la prison Victor Verster, neuf jours après la levée de l'interdiction de l'ANC.
+              </p>
+            </li>
+            <li class="timeline-item">
+              <h3 class="timeline-heading">
+                <button type="button" class="timeline-toggle" tabindex="-1">
+                  <time datetime="1993">1993</time>
+                  <span class="timeline-title">Prix Nobel de la paix</span>
+                </button>
+              </h3>
+              <p class="timeline-detail" id="step-6">
+                Il le reçoit conjointement avec F. W. de Klerk pour leurs efforts en faveur d'une transition pacifique
+                vers la démocratie.
+              </p>
+            </li>
+            <li class="timeline-item">
+              <h3 class="timeline-heading">
+                <button type="button" class="timeline-toggle" tabindex="-1">
+                  <time datetime="1994-05-10">1994</time>
+                  <span class="timeline-title">Président de l'Afrique du Sud</span>
+                </button>
+              </h3>
+              <p class="timeline-detail" id="step-7">
+                Après les premières élections démocratiques du pays, il est investi président le 10 mai.
+              </p>
+            </li>
+            <li class="timeline-item">
+              <h3 class="timeline-heading">
+                <button type="button" class="timeline-toggle" tabindex="-1">
+                  <time datetime="1999">1999</time>
+                  <span class="timeline-title">Fin de mandat et Fondation</span>
+                </button>
+              </h3>
+              <p class="timeline-detail" id="step-8">
+                Il quitte la présidence après un seul mandat et crée la Fondation Nelson Mandela.
+              </p>
+            </li>
+            <li class="timeline-item">
+              <h3 class="timeline-heading">
+                <button type="button" class="timeline-toggle" tabindex="-1">
+                  <time datetime="2013-12-05">2013</time>
+                  <span class="timeline-title">Disparition</span>
+                </button>
+              </h3>
+              <p class="timeline-detail" id="step-9">
+                Il s'éteint à Johannesburg le 5 décembre, à l'âge de 95 ans.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- Citation mise en évidence en fin de contenu. -->
+    <section id="citation" class="section section-quote" aria-labelledby="citation-titre">
+      <h2 id="citation-titre" class="visually-hidden">Citation</h2>
+      <figure class="quote">
+        <blockquote>
+          <p data-words>
+            L'éducation est l'arme la plus puissante que nous puissions utiliser pour changer le monde.
+          </p>
+        </blockquote>
+        <figcaption>
+          Nelson Mandela, discours de lancement du Mindset Network, 16 juillet 2003
+          <span class="quote-note">
+            Traduction libre de l'anglais :
+            « <span lang="en">Education is the most powerful weapon we can use to change the world.</span> »
+          </span>
+        </figcaption>
+      </figure>
+    </section>
+  </main>
+
+  <!-- Références documentaires et crédits de réalisation. -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p class="footer-logo">Madiba</p>
+        <p>Hommage à Nelson Mandela (1918 – 2013).</p>
+      </div>
+      <div id="sources">
+        <p class="footer-title">Sources</p>
+        <p>
+          <a
+            href="https://www.nelsonmandela.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Fondation Nelson Mandela</a>
+          et
+          <a
+            href="https://www.britannica.com/biography/Nelson-Mandela"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Encyclopædia Britannica</a>.
+          Texte rédigé à partir de ces sources.
+        </p>
+      </div>
+      <div id="credits">
+        <p class="footer-title">Crédits</p>
+        <p>
+          Page réalisée par Georvelain Dieuveil MIBANTESSA — AICTE Oasis Infobyte, Web Development and Designing,
+          Level 2, Task 2 : Tribute Page.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <button
+    type="button"
+    id="back-to-top"
+    class="back-to-top"
+    aria-label="Retour en haut de la page"
+    hidden
+  >&uarr;</button>
+
+  <script src="js/script.js" defer></script>
+</body>
+</html>

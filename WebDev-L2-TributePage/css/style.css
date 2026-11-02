@@ -1,0 +1,1293 @@
+/* ==========================================================================
+   Tribute Page — Nelson Mandela
+   Direction : éditorial noir et blanc cassé (titre géant, grandes zones noires,
+   bande grise, cartes noires, angles droits). Biographie en onglets,
+   chronologie horizontale.
+   Sommaire : 1 Variables · 2 Base · 3 Barre du haut et menu · 4 En-tête
+              5 Repères · 6 Biographie · 7 Chronologie · 8 Citation
+              9 Pied de page · 10 Bouton retour · 11 Animations
+              12 Responsive · 13 Mouvement réduit
+   ========================================================================== */
+
+/* 1. Variables ------------------------------------------------------------ */
+
+:root {
+  --paper: #ecebe6;
+  /* blanc cassé */
+  --paper-2: #dcdad5;
+  /* gris clair (citation) */
+  --black: #0a0a0a;
+  --ink: #111111;
+  --ink-soft: #4a4742;
+  --white: #ffffff;
+  --on-dark-soft: #cdcac3;
+  --gray-top: #b9b7b2;
+  /* bande grise de la biographie */
+  --gray-bottom: #dcdad5;
+  --line: rgba(10, 10, 10, 0.18);
+  --line-dark: rgba(255, 255, 255, 0.16);
+  --font-display: "Arial Black", "Segoe UI Black", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: Georgia, "Times New Roman", "Noto Serif", serif;
+  --topbar-height: 2rem;
+  --nav-height: 4.5rem;
+  --pad: clamp(1.25rem, 5vw, 4.5rem);
+  --max: 90rem;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* 2. Base ----------------------------------------------------------------- */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-height) + 1rem);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--black);
+  outline-offset: 3px;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  top: -4rem;
+  left: 1rem;
+  z-index: 300;
+  padding: 0.6rem 1rem;
+  background: var(--black);
+  color: var(--white);
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 2.5rem;
+}
+
+.label {
+  margin: 0 0 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* 3. Barre du haut et menu ------------------------------------------------ */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: var(--topbar-height);
+  padding: 0.3rem var(--pad);
+  background: var(--black);
+  color: var(--white);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.topbar p {
+  margin: 0;
+}
+
+.topbar-links {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.topbar a {
+  text-decoration: none;
+}
+
+.topbar a:hover {
+  text-decoration: underline;
+}
+
+.topbar :focus-visible {
+  outline-color: var(--white);
+}
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  height: var(--nav-height);
+  padding: 0 var(--pad);
+  background: var(--paper);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.site-nav.is-scrolled {
+  border-bottom-color: var(--line);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-right {
+  justify-content: flex-end;
+}
+
+.nav-links a {
+  position: relative;
+  padding: 0.4rem 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.nav-links a:not(.nav-pill)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--black);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--ease);
+}
+
+.nav-links a:hover::after, .nav-links a.is-active:not(.nav-pill)::after {
+  transform: scaleX(1);
+}
+
+.nav-links .nav-pill {
+  padding: 0.6rem 1.3rem;
+  border: 2px solid var(--black);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-links .nav-pill:hover, .nav-links .nav-pill.is-active {
+  background: var(--black);
+  color: var(--white);
+}
+
+.nav-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.brand-sub {
+  margin-top: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+}
+
+.progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 3px;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 100%;
+  background: var(--black);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* 4. En-tête (hero) ------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3rem) var(--pad) clamp(2.5rem, 5vw, 4rem);
+}
+
+.tagline {
+  position: relative;
+  max-width: 17rem;
+  margin: 0;
+  padding-bottom: 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.7;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.tagline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 2rem;
+  height: 2px;
+  background: var(--black);
+}
+
+.hero-stage {
+  position: relative;
+  margin: clamp(1rem, 3vw, 2rem) 0 7rem;
+}
+
+.hero h1 {
+  margin: 0;
+  line-height: 1;
+}
+
+.h1-first {
+  display: block;
+  margin: 0 0 0.6rem;
+  font-size: clamp(0.8rem, 1.3vw, 1.05rem);
+  font-weight: 700;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+}
+
+.h1-last {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(3.2rem, 15.2vw, 14rem);
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Le portrait chevauche le titre, comme sur la maquette */
+
+.portrait {
+  --portrait: clamp(124px, 13vw, 189px);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: var(--portrait);
+  margin: 0 auto;
+  z-index: 2;
+}
+
+.portrait img {
+  width: var(--portrait);
+  height: auto;
+  border: 5px solid var(--paper);
+  filter: grayscale(1) contrast(1.06);
+  box-shadow: 0 22px 44px rgba(10, 10, 10, 0.35);
+}
+
+.portrait figcaption {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 15rem;
+  margin: 0.7rem 0 0 -7.5rem;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+.portrait figcaption a {
+  color: var(--ink);
+}
+
+.hero-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem 2rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem 1.7rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid var(--black);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-solid {
+  background: var(--black);
+  color: var(--white);
+}
+
+.btn-solid:hover {
+  background: transparent;
+  color: var(--black);
+  text-decoration: none;
+}
+
+.btn-link {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 2px solid var(--black);
+  padding-bottom: 0.25rem;
+}
+
+.btn-link:hover {
+  text-decoration: none;
+  opacity: 0.65;
+}
+
+.dates {
+  display: flex;
+  gap: 2.25rem;
+  margin: 0;
+  padding: 0.8rem 0 0;
+  border-top: 2px solid var(--black);
+  text-align: left;
+}
+
+.dates div {
+  margin: 0;
+}
+
+.dates dt {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.dates dd {
+  margin: 0.1rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+/* 5. Repères (bande noire) ------------------------------------------------ */
+
+.facts {
+  background: var(--black);
+  color: var(--white);
+}
+
+.facts-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  min-height: 16rem;
+  padding: 2.25rem 1.75rem;
+  border-left: 1px solid var(--line-dark);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 70%);
+}
+
+.fact:first-child {
+  border-left: 0;
+}
+
+.fact p {
+  margin: 0;
+}
+
+.fact-figure {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.fact-label {
+  margin-top: 0.6rem !important;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.fact-text {
+  margin-top: 0.9rem !important;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--on-dark-soft);
+}
+
+.fact-link {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.facts :focus-visible {
+  outline-color: var(--white);
+}
+
+/* 6. Biographie (bande grise) --------------------------------------------- */
+
+.section {
+  padding: clamp(3.5rem, 8vw, 6rem) var(--pad);
+}
+
+.section-bio {
+  background: linear-gradient(180deg, var(--gray-top) 0%, var(--gray-bottom) 100%);
+}
+
+.bio-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.section-bio h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.55rem, 3.3vw, 3.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.bio-text {
+  max-width: 40rem;
+}
+
+.bio-text p {
+  margin: 0 0 1.5rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.2rem);
+  line-height: 1.85;
+  text-wrap: pretty;
+}
+
+.bio-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* Onglets (créés par le JavaScript) : filtrage de la biographie */
+
+.has-js .bio-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 2rem;
+}
+
+.bio-tab {
+  padding: 0.7rem 1.2rem;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: transparent;
+  border: 2px solid var(--black);
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.bio-tab:hover {
+  background: rgba(10, 10, 10, 0.1);
+}
+
+.bio-tab[aria-selected="true"] {
+  color: var(--white);
+  background: var(--black);
+}
+
+/* Les 4 paragraphes sont superposés : la hauteur reste celle du plus long,
+   la page ne saute donc pas quand on change d'onglet. */
+
+.has-js .bio-text {
+  display: grid;
+}
+
+.has-js .bio-text p {
+  grid-area: 1 / 1;
+  margin: 0;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.has-js .bio-text p.is-active {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* 7. Chronologie ---------------------------------------------------------- */
+
+.section-timeline {
+  background: var(--paper);
+}
+
+.timeline-wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 0 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.section-head h2 {
+  margin: 0;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.section-note {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* Sans JavaScript : liste verticale, toutes les étapes lisibles */
+
+.timeline {
+  --year-col: 6rem;
+  --toggle-gap: 2rem;
+  position: relative;
+  max-width: 44rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.timeline::before, .timeline::after {
+  content: "";
+  position: absolute;
+  top: 0.6rem;
+  bottom: 0.6rem;
+  left: var(--year-col);
+  width: 2px;
+}
+
+.timeline::before {
+  background: var(--line);
+}
+
+.timeline::after {
+  background: var(--black);
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 2.25rem;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-heading {
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.timeline-toggle {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--year-col) minmax(0, 1fr);
+  column-gap: var(--toggle-gap);
+  align-items: start;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: default;
+  pointer-events: none;
+}
+
+.timeline-toggle::before {
+  content: "";
+  position: absolute;
+  top: 0.82rem;
+  left: var(--year-col);
+  width: 12px;
+  height: 12px;
+  background: var(--paper);
+  border: 2px solid var(--black);
+  border-radius: 50%;
+  transform: translateX(-5px);
+}
+
+.timeline-item time {
+  padding-right: 1.25rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.1rem, 2.6vw, 1.4rem);
+  line-height: 1.6;
+  text-align: right;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.timeline-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.6;
+}
+
+.timeline-detail {
+  margin: 0.3rem 0 0 calc(var(--year-col) + var(--toggle-gap));
+  font-family: var(--font-serif);
+  color: var(--ink-soft);
+}
+
+/* Avec JavaScript : frise horizontale + carte noire de détail ------------- */
+
+.has-js .timeline-viewport {
+  margin: 0 -0.5rem;
+  padding: 0.35rem 0.5rem 0.9rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+}
+
+.has-js .timeline {
+  display: flex;
+  width: max-content;
+  min-width: 100%;
+  max-width: none;
+}
+
+.has-js .timeline::before, .has-js .timeline::after {
+  top: auto;
+  bottom: 8px;
+  height: 2px;
+  left: calc(100% / 18);
+  width: auto;
+}
+
+.has-js .timeline::before {
+  right: calc(100% / 18);
+}
+
+.has-js .timeline::after {
+  width: var(--fill, 0px);
+  transition: width 0.5s var(--ease);
+}
+
+.has-js .timeline-item {
+  flex: 1 0 4.4rem;
+  padding-bottom: 0;
+}
+
+.has-js .timeline-toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.5rem 0.25rem 1.75rem;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.has-js .timeline-toggle::before {
+  top: auto;
+  bottom: 0;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translateX(-50%);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s var(--ease);
+}
+
+.has-js .timeline-toggle:hover::before {
+  transform: translateX(-50%) scale(1.2);
+}
+
+.has-js .timeline-item.is-open .timeline-toggle::before {
+  background: var(--black);
+  box-shadow: 0 0 0 5px rgba(10, 10, 10, 0.18);
+  transform: translateX(-50%) scale(1.1);
+}
+
+.has-js .timeline-item time {
+  padding: 0;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-align: center;
+  color: var(--ink-soft);
+  transition: color 0.3s ease, transform 0.3s var(--ease);
+}
+
+.has-js .timeline-toggle:hover time {
+  color: var(--black);
+}
+
+.has-js .timeline-item.is-open time {
+  color: var(--black);
+  font-weight: 900;
+  transform: translateY(-2px) scale(1.15);
+}
+
+/* Le titre complet reste lu par les lecteurs d'écran ; il s'affiche dans la carte */
+
+.has-js .timeline-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.has-js .timeline-detail {
+  display: none;
+}
+
+/* Carte de détail, créée par le JavaScript */
+
+.timeline-panel {
+  margin-top: 1.5rem;
+  padding: clamp(1.5rem, 4vw, 2.75rem);
+  background: var(--black);
+  color: var(--white);
+}
+
+.step-cards {
+  display: grid;
+}
+
+.step-card {
+  grid-area: 1 / 1;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: clamp(1.5rem, 5vw, 3.5rem);
+  align-items: start;
+  align-content: start;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.step-card.is-active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.step-year {
+  grid-row: 1 / span 2;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(3rem, 9vw, 6rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.step-title {
+  margin: 0 0 0.6rem;
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.step-text {
+  margin: 0;
+  max-width: 38rem;
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--on-dark-soft);
+  text-wrap: pretty;
+}
+
+.step-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line-dark);
+}
+
+.step-counter {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  font-variant-numeric: tabular-nums;
+  color: var(--on-dark-soft);
+}
+
+.step-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1.3rem;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: transparent;
+  border: 2px solid var(--white);
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.step-btn:hover:not(:disabled) {
+  color: var(--black);
+  background: var(--white);
+}
+
+.step-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.timeline-panel :focus-visible {
+  outline-color: var(--white);
+}
+
+/* 8. Citation ------------------------------------------------------------- */
+
+.section-quote {
+  background: var(--paper-2);
+  padding-block: clamp(4rem, 10vw, 8rem);
+}
+
+.quote {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding-left: clamp(1.25rem, 4vw, 3rem);
+  border-left: 10px solid var(--black);
+}
+
+.quote blockquote {
+  margin: 0;
+}
+
+.quote blockquote p {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.6rem, 4.4vw, 3.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.quote blockquote p::before {
+  content: "«";
+  display: block;
+  margin-bottom: 0.25em;
+  font-size: 1.8em;
+  line-height: 0.6;
+}
+
+.quote figcaption {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.quote-note {
+  display: block;
+  margin-top: 0.75rem;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-soft);
+}
+
+/* 9. Pied de page --------------------------------------------------------- */
+
+.site-footer {
+  background: var(--black);
+  color: var(--white);
+  padding: clamp(3rem, 7vw, 5rem) var(--pad) 5rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1.4fr 1.4fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.footer-logo {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.footer-title {
+  margin: 0 0 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.site-footer p {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--on-dark-soft);
+}
+
+.site-footer p.footer-title {
+  color: var(--white);
+}
+
+.site-footer p.footer-logo {
+  color: var(--white);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1;
+}
+
+.site-footer a {
+  color: var(--white);
+}
+
+.site-footer :focus-visible {
+  outline-color: var(--white);
+}
+
+/* 10. Bouton retour en haut ---------------------------------------------- */
+
+.back-to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 90;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--black);
+  color: var(--white);
+  border: 0;
+  border-radius: 0;
+  box-shadow: 0 0 0 2px var(--white), 0 8px 20px rgba(10, 10, 10, 0.3);
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.back-to-top[hidden] {
+  display: none;
+}
+
+.back-to-top:hover {
+  transform: translateY(-2px);
+}
+
+.back-to-top:focus-visible {
+  outline-color: var(--white);
+}
+
+/* 11. Animations (actives seulement si la classe .js est présente) ------- */
+
+.js .tagline, .js .h1-first, .js .h1-last, .js .portrait, .js .hero-actions, .js .dates {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  animation: rise 0.9s var(--ease) forwards;
+}
+
+.js .tagline {
+  animation-delay: 0.05s;
+}
+
+.js .h1-first {
+  animation-delay: 0.15s;
+}
+
+.js .h1-last {
+  animation-delay: 0.25s;
+}
+
+.js .portrait {
+  animation-delay: 0.5s;
+}
+
+.js .hero-actions {
+  animation-delay: 0.65s;
+}
+
+.js .dates {
+  animation-delay: 0.75s;
+}
+
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.js .bio-text p.is-active, .js .step-card.is-active {
+  animation: rise 0.55s var(--ease) both;
+}
+
+.js .quote .word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.5em);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  transition-delay: calc(var(--i) * 70ms);
+}
+
+.js .quote.is-visible .word {
+  opacity: 1;
+  transform: none;
+}
+
+.js .quote figcaption {
+  opacity: 0;
+  transition: opacity 0.8s ease 1.3s;
+}
+
+.js .quote.is-visible figcaption {
+  opacity: 1;
+}
+
+/* 12. Responsive ---------------------------------------------------------- */
+
+@media (max-width: 960px) {
+  .bio-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .facts-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .fact {
+    min-height: 13rem;
+    border-top: 1px solid var(--line-dark);
+  }
+  .fact:nth-child(odd) {
+    border-left: 0;
+  }
+  .footer-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .topbar-links {
+    display: none;
+  }
+  .site-nav {
+    display: flex;
+    justify-content: center;
+  }
+  .nav-brand {
+    display: none;
+  }
+  .nav-links {
+    gap: 0.9rem;
+  }
+  .nav-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+  }
+  .nav-links .nav-pill {
+    padding: 0.45rem 0.8rem;
+  }
+  .hero-stage {
+    margin-bottom: 1.5rem;
+  }
+  .portrait {
+    position: static;
+    margin: -0.5rem auto 0;
+    --portrait: clamp(130px, 38vw, 189px);
+  }
+  .portrait figcaption {
+    position: static;
+    width: auto;
+    margin: 0.8rem 0 0;
+  }
+  .hero-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.75rem;
+  }
+  .timeline {
+    --year-col: 3.9rem;
+    --toggle-gap: 1.25rem;
+  }
+  .timeline-item time {
+    padding-right: 0.9rem;
+  }
+  .timeline-title {
+    font-size: 1.05rem;
+  }
+  .step-card {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 0.5rem;
+  }
+  .step-year {
+    grid-row: auto;
+  }
+  .step-label {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .nav-links {
+    gap: 0.6rem;
+  }
+  .nav-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+  }
+  .facts-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .fact {
+    border-left: 0;
+  }
+}
+
+/* 13. Mouvement réduit ---------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+

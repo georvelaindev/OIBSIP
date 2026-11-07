@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription | Système d'authentification</title>
+
+  <!-- Feuille de style commune aux trois pages -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="auth-page">
+
+  <!-- Carte centrale contenant le formulaire d'inscription -->
+  <main class="auth-card">
+
+    <!-- En-tête : titre et sous-titre -->
+    <header class="auth-header">
+      <h1>Créer un compte</h1>
+      <p>Renseigne tes informations pour t'inscrire.</p>
+    </header>
+
+    <!-- Formulaire : "novalidate" car la validation est faite en JavaScript -->
+    <form id="register-form" novalidate>
+
+      <!-- Champ : nom d'utilisateur -->
+      <div class="form-group">
+        <label for="username">Nom d'utilisateur</label>
+        <input type="text" id="username" name="username" autocomplete="username" placeholder="ex. georvelain">
+        <small class="error-message" id="username-error" role="alert"></small>
+      </div>
+
+      <!-- Champ : adresse e-mail -->
+      <div class="form-group">
+        <label for="email">Adresse e-mail</label>
+        <input type="email" id="email" name="email" autocomplete="email" placeholder="ex. nom@exemple.com">
+        <small class="error-message" id="email-error" role="alert"></small>
+      </div>
+
+      <!-- Champ : mot de passe (8 caractères minimum dont 1 chiffre) -->
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="password" autocomplete="new-password" placeholder="8 caractères minimum, 1 chiffre">
+        <small class="hint">Au moins 8 caractères dont 1 chiffre.</small>
+        <small class="error-message" id="password-error" role="alert"></small>
+      </div>
+
+      <!-- Message général (succès ou erreur) rempli par le JavaScript -->
+      <p class="form-message" id="form-message" role="alert"></p>
+
+      <button type="submit" class="btn">S'inscrire</button>
+    </form>
+
+    <!-- Lien vers la page de connexion -->
+    <footer class="auth-footer">
+      <p>Déjà inscrit ? <a href="login.html">Se connecter</a></p>
+    </footer>
+
+  </main>
+
+  <!-- Scripts : auth.js (fonctions communes) doit être chargé avant register.js -->
+  <script src="js/auth.js"></script>
+  <script src="js/register.js"></script>
+</body>
+
+</html>

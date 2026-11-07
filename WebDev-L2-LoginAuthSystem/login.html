@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion | Système d'authentification</title>
+
+  <!-- Feuille de style commune aux trois pages -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="auth-page">
+
+  <!-- Carte centrale contenant le formulaire de connexion -->
+  <main class="auth-card">
+
+    <!-- En-tête : titre et sous-titre -->
+    <header class="auth-header">
+      <h1>Connexion</h1>
+      <p>Accède à ton espace personnel.</p>
+    </header>
+
+    <!-- Formulaire : "novalidate" car la validation est faite en JavaScript -->
+    <form id="login-form" novalidate>
+
+      <!-- Champ : nom d'utilisateur ou e-mail -->
+      <div class="form-group">
+        <label for="identifier">Nom d'utilisateur ou e-mail</label>
+        <input type="text" id="identifier" name="identifier" autocomplete="username">
+        <small class="error-message" id="identifier-error" role="alert"></small>
+      </div>
+
+      <!-- Champ : mot de passe -->
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="password" autocomplete="current-password">
+        <small class="error-message" id="password-error" role="alert"></small>
+      </div>
+
+      <!-- Message général (ex. "Identifiants incorrects.") rempli par le JavaScript -->
+      <p class="form-message" id="form-message" role="alert"></p>
+
+      <button type="submit" class="btn">Se connecter</button>
+    </form>
+
+    <!-- Lien vers la page d'inscription -->
+    <footer class="auth-footer">
+      <p>Pas encore de compte ? <a href="register.html">S'inscrire</a></p>
+    </footer>
+
+  </main>
+
+  <!-- Scripts : auth.js (fonctions communes) doit être chargé avant login.js -->
+  <script src="js/auth.js"></script>
+  <script src="js/login.js"></script>
+</body>
+
+</html>

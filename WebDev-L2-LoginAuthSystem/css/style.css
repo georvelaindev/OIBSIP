@@ -1,0 +1,336 @@
+/* =====================================================================
+   style.css : feuille de style commune aux trois pages
+   Sommaire :
+   1. Variables (palette de couleurs)
+   2. Réinitialisation et base
+   3. Pages d'authentification (inscription / connexion)
+   4. Formulaires (champs, messages d'erreur)
+   5. Boutons
+   6. Tableau de bord
+   7. Responsive (mobile)
+   ===================================================================== */
+
+
+/* ---------------------------------------------------------------------
+   1. Variables : pour changer la palette, on modifie uniquement ici
+   --------------------------------------------------------------------- */
+:root {
+  /* Couleurs du fond (dégradé) */
+  --bg-from: #eef2ff;
+  --bg-to: #e0f2fe;
+
+  /* Couleurs de base */
+  --surface: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #e2e8f0;
+
+  /* Couleur d'accent (boutons, liens, bordures) */
+  --accent: #4f46e5;
+  --accent-dark: #4338ca;
+  --accent-soft: #eef2ff;
+  --accent-text: #ffffff;
+
+  /* Couleurs de retour utilisateur */
+  --error: #dc2626;
+  --error-soft: #fef2f2;
+  --success: #16a34a;
+
+  /* Forme et ombre */
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(79, 70, 229, 0.12);
+}
+
+
+/* ---------------------------------------------------------------------
+   2. Réinitialisation et base
+   --------------------------------------------------------------------- */
+
+/* On supprime les marges par défaut et on fixe le calcul des tailles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Garantit qu'un élément avec l'attribut "hidden" reste bien caché */
+[hidden] {
+  display: none !important;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  background: linear-gradient(135deg, var(--bg-from), var(--bg-to));
+  background-attachment: fixed;
+  color: var(--text);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-dark);
+  text-decoration: underline;
+}
+
+
+/* ---------------------------------------------------------------------
+   3. Pages d'authentification : la carte est centrée sur l'écran
+   --------------------------------------------------------------------- */
+.auth-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 5px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 2.25rem 2rem;
+  box-shadow: var(--shadow);
+}
+
+.auth-header {
+  margin-bottom: 1.75rem;
+  text-align: center;
+}
+
+.auth-header h1 {
+  font-size: 1.7rem;
+  margin-bottom: 0.3rem;
+}
+
+.auth-header p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.auth-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+
+/* ---------------------------------------------------------------------
+   4. Formulaires
+   --------------------------------------------------------------------- */
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.88rem;
+  margin-bottom: 0.4rem;
+}
+
+input {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  font-size: 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: #f8fafc;
+  color: var(--text);
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+/* Le champ actif est entouré d'un halo de la couleur d'accent */
+input:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
+}
+
+/* Champ en erreur (classe ajoutée par le JavaScript) */
+input.invalid {
+  border-color: var(--error);
+  background: var(--error-soft);
+}
+
+input.invalid:focus {
+  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.15);
+}
+
+/* Petite aide sous un champ (ex. règle du mot de passe) */
+.hint {
+  display: block;
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+}
+
+/* Message d'erreur sous un champ */
+.error-message {
+  display: block;
+  color: var(--error);
+  font-size: 0.82rem;
+  margin-top: 0.3rem;
+  min-height: 1em;
+}
+
+/* Message général du formulaire (erreur ou succès) */
+.form-message {
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1rem;
+  min-height: 1.2em;
+}
+
+.form-message.error {
+  color: var(--error);
+}
+
+.form-message.success {
+  color: var(--success);
+}
+
+
+/* ---------------------------------------------------------------------
+   5. Boutons
+   --------------------------------------------------------------------- */
+.btn {
+  display: inline-block;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background: var(--accent);
+  color: var(--accent-text);
+  border: 1.5px solid var(--accent);
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+  transition: background 0.15s, transform 0.1s;
+}
+
+.btn:hover {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+/* Petit effet d'enfoncement au clic */
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Variante "contour" utilisée pour le bouton de déconnexion */
+.btn-outline {
+  width: auto;
+  background: transparent;
+  color: var(--accent);
+  box-shadow: none;
+}
+
+.btn-outline:hover {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+}
+
+
+/* ---------------------------------------------------------------------
+   6. Tableau de bord
+   --------------------------------------------------------------------- */
+
+/* Barre du haut : nom de l'espace à gauche, déconnexion à droite */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+}
+
+.brand {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+}
+
+.dashboard {
+  max-width: 640px;
+  margin: 2.5rem auto;
+  padding: 0 1.5rem;
+}
+
+.dashboard h1 {
+  font-size: 1.7rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Le nom de l'utilisateur est mis en valeur */
+.dashboard h1 span {
+  color: var(--accent);
+}
+
+.dashboard > p {
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+.profile-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.profile-card h2 {
+  font-size: 1.15rem;
+  margin-bottom: 1rem;
+}
+
+/* Étiquette de chaque information du profil */
+.profile-card dt {
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Valeur de chaque information du profil */
+.profile-card dd {
+  font-weight: 600;
+  margin-bottom: 0.9rem;
+  word-break: break-word;
+}
+
+
+/* ---------------------------------------------------------------------
+   7. Responsive : ajustements pour les petits écrans
+   --------------------------------------------------------------------- */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .topbar {
+    padding: 0.8rem 1rem;
+  }
+}

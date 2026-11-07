@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tableau de bord | Système d'authentification</title>
+
+  <!-- Feuille de style commune aux trois pages -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<!-- Page protégée : "hidden" cache tout le contenu.
+     dashboard.js ne l'affiche que si une session est active. -->
+<body class="dashboard-page" hidden>
+
+  <!-- Barre du haut : nom de l'espace et bouton de déconnexion -->
+  <header class="topbar">
+    <span class="brand">Espace sécurisé</span>
+    <button type="button" class="btn btn-outline" id="logout-btn">Se déconnecter</button>
+  </header>
+
+  <main class="dashboard">
+
+    <!-- Message de bienvenue : le nom est inséré par le JavaScript -->
+    <h1>Bienvenue, <span id="user-name"></span></h1>
+    <p>Tu es connecté. Cette page n'est accessible qu'avec une session active.</p>
+
+    <!-- Informations du profil, remplies par le JavaScript -->
+    <section class="profile-card">
+      <h2>Mon profil</h2>
+      <dl>
+        <dt>Nom d'utilisateur</dt>
+        <dd id="profile-username"></dd>
+
+        <dt>Adresse e-mail</dt>
+        <dd id="profile-email"></dd>
+
+        <dt>Inscrit le</dt>
+        <dd id="profile-created"></dd>
+      </dl>
+    </section>
+
+  </main>
+
+  <!-- Scripts : auth.js (fonctions communes) doit être chargé avant dashboard.js -->
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+
+</html>

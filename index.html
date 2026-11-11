@@ -5,42 +5,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OIBSIP - Projets Web Dev Niveau 2</title>
   <style>
-    body { 
-      font-family: Arial, 
-      sans-serif; 
-      background: #f5f3ee; 
-      color: #111; 
-      max-width: 600px; 
-      margin: 60px auto; 
-      padding: 0 20px; 
+    * { 
+      box-sizing: border-box; 
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #172554;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+    }
+    .container { 
+      width: 100%; 
+      max-width: 560px; 
     }
     h1 { 
-      margin-bottom: 8px; 
+      font-size: 2rem; 
+      margin: 0 0 8px; 
     }
-    p { 
-      color: #555; 
-      margin-bottom: 30px; 
+    .subtitle { 
+      color: #bfdbfe; 
+      margin: 0 0 32px; 
     }
-    a { 
-      display: block; 
-      padding: 16px 20px; 
-      margin-bottom: 12px; 
-      background: #111; 
-      color: #f5f3ee; 
-      text-decoration: none; 
-      border-radius: 8px; 
+    a {
+      display: block;
+      padding: 18px 22px;
+      margin-bottom: 14px;
+      background: #2563eb;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 10px;
+      transition: background 0.2s, transform 0.2s;
     }
     a:hover { 
-      background: #333; 
+      background: #3b82f6; 
+      transform: translateY(-2px); 
+    }
+    footer { 
+      margin-top: 28px; 
+      color: #93c5fd; 
+      font-size: 0.85rem; 
     }
   </style>
 </head>
 <body>
-  <h1>Mes Taches OIBSIP</h1>
-  <p>Stage Développement Web, Niveau 2</p>
-  <a href="WebDev-L2-Calculator/">Tâche 1 : Calculatrice</a>
-  <a href="WebDev-L2-TributePage/">Tâche 2 : Tribute Page</a>
-  <a href="WebDev-L2-TodoApp/">Tâche 3 : To-Do App</a>
-  <a href="WebDev-L2-LoginAuthSystem/">Tâche 4 : Système de login</a>
+  <div class="container">
+    <h1>Mes projets OIBSIP</h1>
+    <p class="subtitle">Stage Développement Web, Niveau 2</p>
+    <a href="WebDev-L2-Calculator/">Tâche 1 : Calculatrice</a>
+    <a href="WebDev-L2-TributePage/">Tâche 2 : Tribute Page</a>
+    <a href="WebDev-L2-TodoApp/">Tâche 3 : To-Do App</a>
+    <a href="WebDev-L2-LoginAuthSystem/">Tâche 4 : Système de login</a>
+    <footer>Georvelain MIBANTESSA</footer>
+  </div>
 </body>
 </html>
